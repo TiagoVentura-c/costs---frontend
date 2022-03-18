@@ -8,6 +8,11 @@ const api = axios.create({
     responseType: 'json'
 });
 
+const apiAuth = axios.create({
+    baseURL: "http://localhost:8080",
+    responseType: 'json'
+});
+
 
 api.interceptors.request.use(async config => {
     const token = getToken();
@@ -17,27 +22,10 @@ api.interceptors.request.use(async config => {
     return config;
 });
 
-export async function login(user){    
-    const response = await axios.post(`http://localhost:8080/login`, user)
-    
-    if((response).status === 200){
-        await saveToken(response.data)
-    }
-
-    /**
-    axios.post(`http://localhost:8080/login`, user)
-    .then(response => {
-        if(response.status === 200){
-        saveToken(response.data)
-    }
-    })
-    .catch(error => console.log(error))   */
-    
+export function auth(url, user){    
+    return apiAuth.post(`${url}`, user)
 }
 
-export function signin(user){
-   return axios.post(`http://localhost:8080/signin`, user)
-}
 
 export function fetch(url){
     return api.get(`${BASE_URL}/${url}`)

@@ -28,7 +28,6 @@ function Projects() {
       () =>
         fetch('project')
           .then((response) => {
-            console.log(response.data)
             setProjects(response.data)
             setRemoveLoading(true)
           }),
