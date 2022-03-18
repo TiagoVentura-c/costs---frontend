@@ -42,7 +42,7 @@ function Signin() {
           password: password
         }
         setIsLoading(true)
-        await auth('/signin', user)
+        await auth('/register', user)
         window.alert('Conta criada com sucesso')
       
         history.push("/login")
