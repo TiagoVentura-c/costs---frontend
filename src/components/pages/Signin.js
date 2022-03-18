@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { auth } from "../Api/api"
+
+import styles from './Login.module.css'
+
 import Input from "../form/Input"
 import SubmitButton from "../form/SubmitButton"
 import Loading from '../layout/Loading';
 import Message from '../layout/Message';
-import styles from './Signin.css'
 
 function Signin() {
   const history = useHistory();
@@ -40,8 +42,9 @@ function Signin() {
           password: password
         }
         setIsLoading(true)
-        const response = await auth('/signin', user)
+        await auth('/signin', user)
         window.alert('Conta criada com sucesso')
+      
         history.push("/login")
       } catch (error) {
         setType('error')
@@ -54,11 +57,11 @@ function Signin() {
   }
 
   return (
-    <div className="login-container">
-      
-      {!isLoading && (<div className="login-content">
+    <div className={styles.login_container}>
+      {!isLoading && (
+      <div className={styles.login_content}>
             {message && <Message type={type} msg={message} />}
-            <h2 className="login-title">Faça seu cadastro:</h2>
+            <h2 className={styles.login_title}>Faça seu cadastro:</h2>
             <Input value={name} handleOnChange={handleChangeName} text={"Seu nome"} placeholder={"nome"} type={"text"}/>
             <Input value={email} handleOnChange={handleChangeEmail} text={"Email"} placeholder={"email"} type={"email"} />
             <Input value={password} handleOnChange={handleChangePassword} text={"Senha"} placeholder={"senha"} type={"password"} />

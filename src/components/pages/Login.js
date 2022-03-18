@@ -6,12 +6,12 @@ import { saveToken } from "../Api/auth"
 import Input from "../form/Input"
 import SubmitButton from "../form/SubmitButton"
 
-import styles from './Login.css'
+import styles from './Login.module.css'
 import Message from "../layout/Message"
 
 function Login() {
   const history = useHistory();
-
+  
   useEffect(()=> {
   }, [])
 
@@ -56,10 +56,10 @@ function Login() {
   }
 
   return (
-    <div className="login-container">
-        {!isLoading && (<div className="login-content">
+    <div className={styles.login_container}>
+      {!isLoading && (<div className={styles.login_content}>
             {message && <Message type={type} msg={message} />}
-            <h2 className="login-title">Faça seu login:</h2>
+        <h2 className={styles.login_title}>Faça seu login:</h2>
             <Input value={email} handleOnChange={handleChangeEmail} text={"Email"} placeholder={"email"} type={"email"} />
             <Input value={password} handleOnChange={handleChangePassword} text={"Senha"} placeholder={"senha"} type={"password"} />
             <SubmitButton text={"Entrar"} handleOnClick={handleSignIn}/>
